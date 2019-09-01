@@ -29,23 +29,21 @@ def main():
 #os.walk() root: der angegebene path
 #os.walk() dir: subdirectories im angegebenen path
 #os.walk() files: all files from actual root
-    basename = "C:\\Users\\faelb\\Desktop\\testfolderToUSB"
-    filepaths = []
 
+
+
+    filepaths = []
+    zf = ZipFile("C:\\Users\\faelb\\Desktop\\myZip.zip", 'w')
     for root, dir, files in os.walk("C:\\Users\\faelb\\Desktop\\testfolderToUSB"):
         for filenames in files:
-            filepaths.append(os.path.join(root, filenames))
-            print("all paths added")
+            #print(root)
+            #print(dir)
+            #print(files)
+            zf.write(os.path.join(root, filenames), filenames)
+            print("added ", filenames, " to Zipfile \n")
+    zf.close()
 
-    with ZipFile("C:\\Users\\faelb\\Desktop\\myZip.zip", 'w') as zip:
-        for files in filepaths:
-            zip.write(files, basename)
 
     print("Files zipped")
-        #print("root: ", root)
-        #print("dir: ", dir)
-        #print("files: ", files)
-
-    #getFilePath("C:/Users/faelb/Desktop/testfolderToUSB")
 
 main()
